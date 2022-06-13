@@ -6,7 +6,7 @@ let currentWinner = "";
 function addPlayer(name) {
 	if (name == null || name == "") return -1;
 
-	const table = document.getElementById("players-table");
+	const table = document.querySelector("#players-table");
 	let row = table.insertRow(index + 1);
 
 	let cell1 = row.insertCell(0);
@@ -32,11 +32,11 @@ function setWinner(winner) {
 
 function customPrompt() {
 	return new Promise((resolve, reject) => {
-		document.getElementById("btn1").onclick = () => {
+		document.querySelector("#btn1").onclick = () => {
 			resolve(1); // returns 1 if choosed player 1
 		};
 
-		document.getElementById("btn2").onclick = () => {
+		document.querySelector("#btn2").onclick = () => {
 			resolve(2); // returns 2 if choosed player 2
 		};
 	});
@@ -44,11 +44,11 @@ function customPrompt() {
 
 function renderMatch(player1, player2) {
 	// TODO: make query selector stuff
-	let gamediv = document.getElementById("game");
-	let versus = document.getElementById("versus");
-	let maindiv = document.getElementById("main");
-	let btn1 = document.getElementById("btn1");
-	let btn2 = document.getElementById("btn2");
+	let gamediv = document.querySelector("#game");
+	let versus = document.querySelector("#versus");
+	let maindiv = document.querySelector("#main");
+	let btn1 = document.querySelector("#btn1");
+	let btn2 = document.querySelector("#btn2");
 	maindiv.style.display = "none";
 	gamediv.style.display = "initial";
 
