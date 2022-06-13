@@ -6,24 +6,41 @@ let currentWinner = "";
 function addPlayer(name) {
 	if (name == null || name == "") return -1;
 
+	if (players.includes(name)) {
+		alert("Não pode nome repetido pq o desenvolvedor está com preguiça de implementar o programa do jeito certo\nTente novamente");
+		return -1;
+	}
 	const table = document.querySelector("#players-table");
+	let removebtn = document.createElement("button");
+
+	removebtn.classList.add("rm-btn");
+	removebtn.innerText = "❌";
+
 	let row = table.insertRow(index + 1);
 
 	let cell1 = row.insertCell(0);
 	let cell2 = row.insertCell(1);
+	let cell3 = row.insertCell(2);
 
 	cell1.innerText = index + 1;
 	cell2.innerText = name;
+	cell3.style.border = "none"
+	cell3.appendChild(removebtn);
+	removebtn.onclick = () => {
+		removePlayer(name);
+	};
 	players.push(name);
-
 	index++;
 }
 
-addPlayer("joão gabriel");
-addPlayer("luiz arruda");
-addPlayer("dudu");
-addPlayer("mago");
+function removePlayer(playerName) {
+	let del_index = players.indexOf(playerName);
+	if (del_index > -1) {
+		players.splice(del_index, 1); // 2nd parameter means remove one item only
+	}
 
+	document.querySelector("#players-table").deleteRow(del_index + 1);
+}
 
 function setWinner(winner) {
 	currentWinner = winner;
@@ -52,10 +69,10 @@ function renderMatch(player1, player2) {
 	maindiv.style.display = "none";
 	gamediv.style.display = "initial";
 
-	versus.innerText = 
-	`${player1}
-	🆚
-	${player2}`;
+	versus.innerText =
+		`${player1}
+		🆚
+		${player2}`;
 	btn1.innerText = player1;
 	btn2.innerText = player2;
 
@@ -84,7 +101,7 @@ async function start() {
 
 		}
 		// console.log(player1)
-		
+
 		document.querySelector("#game").innerHTML = `<h1>🏓🏓🏓<br>O grande ganhador foi:<br><span style="color: lightgreen;">${player1}</span><br>🏓🏓🏓<h1>`;
 	}
 }
