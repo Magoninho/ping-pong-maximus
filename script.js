@@ -33,6 +33,12 @@ function addPlayer(name) {
 	index++;
 }
 
+
+addPlayer("dudu")
+addPlayer("mago")
+addPlayer("arruda")
+addPlayer("gabriel")
+
 function removePlayer(playerName) {
 	let del_index = players.indexOf(playerName);
 	if (del_index > -1) {
@@ -40,6 +46,8 @@ function removePlayer(playerName) {
 	}
 
 	document.querySelector("#players-table").deleteRow(del_index + 1);
+
+	index--; // remove this line and you won't be able to add players again
 }
 
 function setWinner(winner) {
@@ -88,20 +96,47 @@ async function match(player1, player2) {
 async function start() {
 	let l = players.length;
 	if (l > 1) {
-		let player1 = players[0];
-		let player2 = players[1];
 
-		for (let n = 0; n < players.length - 1; n++) {
+		let p1index = 0;
+		let p2index = 1;
+
+
+
+		// for (let n = 0; n < players.length - 1; n++) {
+		// 	let player1 = players[p1index];
+		// 	let player2 = players[p2index];
+
+		// 	if (player1 === player2) {
+		// 		p2index++;
+		// 		continue;
+		// 	}
+		// 	let winner = await match(player1, player2);
+		// 	if (winner == 2)
+		// 		p1index = p2index;
+
+		// 	p2index = (p2index + 1) % players.length;
+
+		// }
+
+
+		// ENDLESS MODE
+		while (true) {
+			let player1 = players[p1index];
+			let player2 = players[p2index];
+
+			if (player1 === player2) {
+				p2index++;
+				continue;
+			}
 			let winner = await match(player1, player2);
 			if (winner == 2)
-				// player 1 will be player2 only if the player2 was the winner
-				player1 = player2;
+				p1index = p2index;
 
-			player2 = players[n + 2];
-
+			p2index = (p2index + 1) % players.length;
 		}
-		// console.log(player1)
 
-		document.querySelector("#game").innerHTML = `<h1>🏓🏓🏓<br>O grande ganhador foi:<br><span style="color: lightgreen;">${player1}</span><br>🏓🏓🏓<h1>`;
+		console.log(players[p1index])
+
+		document.querySelector("#game").innerHTML = `<h1>🏓🏓🏓<br>O grande ganhador foi:<br><span style="color: lightgreen;">${players[p1index]}</span><br>🏓🏓🏓<h1>`;
 	}
 }
