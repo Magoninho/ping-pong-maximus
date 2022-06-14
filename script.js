@@ -34,11 +34,6 @@ function addPlayer(name) {
 }
 
 
-addPlayer("dudu")
-addPlayer("mago")
-addPlayer("arruda")
-addPlayer("gabriel")
-
 function removePlayer(playerName) {
 	let del_index = players.indexOf(playerName);
 	if (del_index > -1) {
