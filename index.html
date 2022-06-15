@@ -6,71 +6,13 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Ping Pong Maximus</title>
-	<style>
-		body {
-			background-color: #406c9b;
-			color: white;
-			text-align: center;
-		}
-
-
-		h1 {
-			font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-			font-size: 40pt;
-		}
-
-		h2 {
-			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-		}
-
-		/* fonts */
-		p,
-		table,
-		button {
-			font-family: monospace;
-			font-size: x-large;
-		}
-
-		button {
-			cursor: pointer;
-			margin-top: 10px;
-			height: 50px;
-			padding-left: 10px;
-			padding-right: 10px;
-			border-width: 1px;
-			color: #666666;
-			border-color: #dcdcdc;
-			border-top-left-radius: 6px;
-			border-top-right-radius: 6px;
-			border-bottom-left-radius: 6px;
-			border-bottom-right-radius: 6px;
-			box-shadow: 0px 1px 0px 0px #000;
-			background: linear-gradient(#ffffff, #bbbbbb);
-		}
-		button:active {
-			background: linear-gradient(#bbbbbb, #ffffff);
-		}
-
-		table,
-		tr,
-		td,
-		th {
-			margin: 0 auto;
-			padding: 5px;
-			border: 1px solid white;
-			border-collapse: collapse;
-			min-width: 100px;
-			max-width: 500px;
-			word-wrap: break-word;
-		}
-	</style>
+	<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+	<h1>Ping Pong Manager 🏓</h1>
+	<p>Para partidas de ping pong que são desorganizadas ficarem organizadas xD</p>
 	<div id="main">
-		<h1>Ping Pong Maximus 🏓</h1>
-		<p>provavelmente ninguém vai usar isso aqui, mas eu fiz pq eu queria tentar fazer um sistema de torneio com
-			programations, mas se der pra usar blz man</p>
 
 		<table id="players-table">
 			<tr>
@@ -83,7 +25,10 @@
 		<br>
 		<button class="btn" onclick="addPlayer(prompt('Digite um nome'))">➕ adicionar jogador</button>
 
-		<button onclick="start()">▶️ iniciar partidas</button>
+		<button onclick="start()">▶️ iniciar partidas</button><br>
+
+		<input type="checkbox" id="endless">
+		<label for="endless">Sem ganhador</label>
 	</div>
 
 	<div id="game" style="display: none;">

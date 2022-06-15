@@ -96,42 +96,41 @@ async function start() {
 		let p2index = 1;
 
 
+		let endless = document.querySelector("#endless").checked;
+		if (endless) {
+			// ENDLESS MODE
+			while (true) {
+				let player1 = players[p1index];
+				let player2 = players[p2index];
 
-		// for (let n = 0; n < players.length - 1; n++) {
-		// 	let player1 = players[p1index];
-		// 	let player2 = players[p2index];
+				// this is to prevent the player to go against himself
+				if (player1 === player2) {
+					p2index++;
+					continue;
+				}
+				let winner = await match(player1, player2);
+				if (winner == 2)
+					p1index = p2index;
 
-		// 	if (player1 === player2) {
-		// 		p2index++;
-		// 		continue;
-		// 	}
-		// 	let winner = await match(player1, player2);
-		// 	if (winner == 2)
-		// 		p1index = p2index;
-
-		// 	p2index = (p2index + 1) % players.length;
-
-		// }
-
-
-		// ENDLESS MODE
-		while (true) {
-			let player1 = players[p1index];
-			let player2 = players[p2index];
-
-			if (player1 === player2) {
-				p2index++;
-				continue;
+				p2index = (p2index + 1) % players.length;
 			}
-			let winner = await match(player1, player2);
-			if (winner == 2)
-				p1index = p2index;
+		} else {
+			for (let n = 0; n < players.length - 1; n++) {
+				let player1 = players[p1index];
+				let player2 = players[p2index];
 
-			p2index = (p2index + 1) % players.length;
+				if (player1 === player2) {
+					p2index++;
+					continue;
+				}
+				let winner = await match(player1, player2);
+				if (winner == 2)
+					p1index = p2index;
+
+				p2index = (p2index + 1) % players.length;
+
+			}
+			document.querySelector("#game").innerHTML = `<h1>🏓🏓🏓<br>O grande ganhador foi:<br><span style="color: lightgreen;">${players[p1index]}</span><br>🏓🏓🏓<h1>`;
 		}
-
-		console.log(players[p1index])
-
-		document.querySelector("#game").innerHTML = `<h1>🏓🏓🏓<br>O grande ganhador foi:<br><span style="color: lightgreen;">${players[p1index]}</span><br>🏓🏓🏓<h1>`;
 	}
 }
